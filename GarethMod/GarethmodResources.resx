@@ -1,0 +1,286 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="garethmodwatermark" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmodwatermark.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_archerfish" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_archerfish.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_archerfish_emission" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_archerfish_emission.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_drawally" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_drawally.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_elephant" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_elephant.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_elephant_emission" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_elephant_emission.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_gambler" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_gambler.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_gareth48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_gareth48.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_gareth48_emission" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_gareth48_emission.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_golem" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_golem.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_golem_emission" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_golem_emission.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_herculesbeetle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_herculesbeetle.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_herculesbeetle_emission" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_herculesbeetle_emission.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_hungry" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_hungry.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_hyena" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_hyena.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_hyena_emission" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_hyena_emission.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_identitytheft" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_identitytheft.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_killerbees" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_killerbees.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_killerbees_emission" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_killerbees_emission.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_lemming" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_lemming.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_lemming_emission" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_lemming_emission.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_leopard" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_leopard.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_leopard_emission" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_leopard_emission.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_lion" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_lion.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_lioncub" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_lioncub.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_lioncub_emission" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_lioncub_emission.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_lion_emission" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_lion_emission.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_oxpecker" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_oxpecker.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_oxpecker_emission" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_oxpecker_emission.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_panther" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_panther.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_panthercub" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_panthercub.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_panthercub_emission" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_panthercub_emission.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_panther_emission" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_panther_emission.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_pig" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_pig.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_pig_alt" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_pig_alt.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_pig_emission" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_pig_emission.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_piranha" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_piranha.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_piranha_emission" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_piranha_emission.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_sapling" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_sapling.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_sapling_emission" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_sapling_emission.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_shove" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_shove.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_skinwalker" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_skinwalker.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_skinwalker_emission" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_skinwalker_emission.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_snag" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_snag.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_snag_emission" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_snag_emission.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_standoffish" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_standoffish.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_tasmaniandevil" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_tasmaniandevil.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_tasmaniandevil_emission" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_tasmaniandevil_emission.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_tastymorsel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_tastymorsel.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_treant" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_treant.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_treant_emission" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_treant_emission.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_woundedanimal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_woundedanimal.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_woundedanimal_emission" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_woundedanimal_emission.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_younglion" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_younglion.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="garethmod_younglion_emission" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>artwork\garethmod_younglion_emission.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+</root>
