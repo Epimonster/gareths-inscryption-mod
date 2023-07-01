@@ -71,6 +71,7 @@ namespace GarethMod
             //AddHungry();
             //AddFlighty();
 
+
             CardInfo Skinwalker = CardManager.New(
                 modPrefix: PluginPrefix, 
                 "Garethmod_Skinwalker", 
@@ -86,6 +87,7 @@ namespace GarethMod
             .SetEmissivePortrait("garethmod_skinwalker_emission.png");
             CardManager.Add(PluginPrefix, Skinwalker);
 
+
             CardInfo WoundedAnimal = CardManager.New(
                 modPrefix: PluginPrefix,
                 "Garethmod_WoundedAnimal",
@@ -95,11 +97,81 @@ namespace GarethMod
                 description: "An easy target for hungry predators."
             ).SetCost(bonesCost: 3)
             .AddAbilities(Garethmod_TastyMorsel.ability)
-            .AddAppearances(GarethmodDecal)
+            .AddAppearances(CardAppearanceBehaviour.Appearance.AlternatingBloodDecal, GarethmodDecal)
             .AddMetaCategories(CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer)
             .SetPortrait("garethmod_woundedanimal.png")
             .SetEmissivePortrait("garethmod_skinwalker_emission.png");
             CardManager.Add(PluginPrefix, WoundedAnimal);
+
+
+            CardInfo Lemming = CardManager.New(
+                modPrefix: PluginPrefix,
+                "Garethmod_Lemming",
+                "Lemming",
+                1,
+                1,
+                description: "The paranoid lemming. Fragile and a favorite treat among many animals."
+            ).SetCost(bloodCost: 2)
+            .AddAbilities(Garethmod_TastyMorsel.ability, Ability.Brittle)
+            .AddAppearances(GarethmodDecal)
+            .AddMetaCategories(CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer)
+            .SetPortrait("garethmod_lemming.png")
+            .SetEmissivePortrait("garethmod_lemming_emission.png");
+            CardManager.Add(PluginPrefix, Lemming);
+
+
+            //From this point forward my workflow was augmented by a formatting AI
+
+            //Token: can only be obtained via evolution - Stage 2
+            CardInfo Treant = CardManager.New(
+                modPrefix: PluginPrefix,
+                "Garethmod_Treant",
+                "Treant",
+                1,
+                9,
+                description: ""
+            ).SetCost(bloodCost: 3)
+            .AddAbilities(Ability.WhackAMole, Ability.Sharp)
+            .AddAppearances(CardAppearanceBehaviour.Appearance.RareCardBackground)
+            .SetPortrait("garethmod_treant.png")
+            .SetEmissivePortrait("garethmod_treant_emission.png");
+            CardManager.Add(PluginPrefix, Treant);
+
+
+            //Token: can only be obtained via evolution - Stage 1
+            CardInfo Snag = CardManager.New(
+                modPrefix: PluginPrefix,
+                "Garethmod_Snag",
+                "Snag",
+                0,
+                5,
+                description: ""
+            ).SetCost(bloodCost: 2)
+            .AddAbilities(Ability.Evolve, Ability.Sharp)
+            .AddAppearances(CardAppearanceBehaviour.Appearance.RareCardBackground)
+            .SetPortrait("garethmod_snag.png")
+            .SetEmissivePortrait("garethmod_snag_emission.png")
+            .SetEvolve(Treant, 1);
+            CardManager.Add(PluginPrefix, Snag);
+
+
+            //Rare low damage high health evolution tree - literally
+            CardInfo Sapling = CardManager.New(
+                modPrefix: PluginPrefix,
+                "Garethmod_Sapling",
+                "Sapling",
+                0,
+                3,
+                description: "With time, even the smallest sapling becomes a massive, imposing obstacle."
+            ).SetCost(bloodCost: 1)
+            .AddAbilities(Ability.Evolve)
+            .AddMetaCategories(CardMetaCategory.Rare)
+            .AddAppearances(CardAppearanceBehaviour.Appearance.RareCardBackground)
+            .SetPortrait("garethmod_sapling.png")
+            .SetEmissivePortrait("garethmod_sapling_emission.png")
+            .SetEvolve(Snag, 1);
+            CardManager.Add(PluginPrefix, Sapling);
+
             //Post sigil registration block
             /*
             NewCard.Add("Garethmod_WoundedAnimal", "Wounded Animal", 0, 1, new List<CardMetaCategory>() { CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer }, CardComplexity.Simple, CardTemple.Nature, description: "An easy target for hungry predators.", bonesCost: 3, abilities: new List<Ability> { Garethmod_TastyMorsel.ability }, appearanceBehaviour: new List<CardAppearanceBehaviour.Appearance> { CardAppearanceBehaviour.Appearance.AlternatingBloodDecal }, defaultTex: loadTex(Artwork.garethmod_woundedanimal), decals: watermark, emissionTex: loadTex(Artwork.garethmod_woundedanimal_emission));

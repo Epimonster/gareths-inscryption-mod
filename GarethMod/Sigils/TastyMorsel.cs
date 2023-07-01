@@ -1,13 +1,8 @@
-﻿using BepInEx;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.IO;
 using DiskCardGame;
 using UnityEngine;
-using APIPlugin;
-using Artwork = GarethMod.GarethmodResources;
 using InscryptionAPI.Card;
 
 namespace GarethMod
@@ -21,7 +16,7 @@ namespace GarethMod
             AbilityInfo tastymorsel = AbilityManager.New(
                 PluginGuid + ".tastymorsel",
                 "Tasty",
-                "When a card bearing this sigil dies, a random creature shows up to devour it.",
+                "When a creature bearing this sigil dies, a random creature shows up to devour it.",
                 typeof(Garethmod_TastyMorsel),
                 "garethmod_tastymorsel.png"
             );
