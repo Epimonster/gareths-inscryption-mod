@@ -30,7 +30,7 @@ namespace GarethMod
             lines.Add(line);
             tastymorsel.abilityLearnedDialogue = new DialogueEvent.LineSet(lines);
 
-            Garethmod_IdentityTheft.ability = tastymorsel.ability;
+            Garethmod_TastyMorsel.ability = tastymorsel.ability;
         }
     }
 

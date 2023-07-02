@@ -7,29 +7,35 @@ using System.IO;
 using DiskCardGame;
 using UnityEngine;
 using APIPlugin;
-using Artwork = GarethMod.GarethmodResources;
+using InscryptionAPI.Card;
 
 namespace GarethMod
 {
     public partial class Plugin
     {
-        private NewAbility AddShove()
+        private void AddShove()
         {
-            AbilityInfo info = ScriptableObject.CreateInstance<AbilityInfo>();
-            info.powerLevel = 0;
-            info.rulebookName = "Shove";
-            info.rulebookDescription = "When a creature bearing this sigil is played, it will move up to the space opposing it. Creatures that are in the way will be pushed in the same direction. Can't push things that are too heavy (like the Pack Mule and the Moon)";
-            info.metaCategories = new List<AbilityMetaCategory> { AbilityMetaCategory.Part1Rulebook, AbilityMetaCategory.Part1Modular };
+            AbilityInfo shove = AbilityManager.New(
+                PluginGuid + ".shove",
+                "Shove",
+                "When a creature bearing this sigil is played, it will move up to the space opposing it. Creatures that are in the way will be pushed in the same direction. Can't push things that are too heavy (like the Pack Mule and the Moon)",
+                typeof(Garethmod_Shove),
+                "garethmod_shove.png"
+            );
+            //We never want leshy to get this on a totem he would just lose, same with you
 
+            shove.powerLevel = -1;
+            shove.opponentUsable = false;
+            shove.metaCategories = new List<AbilityMetaCategory> { AbilityMetaCategory.Part1Rulebook, AbilityMetaCategory.Part1Modular };
             List<DialogueEvent.Line> lines = new List<DialogueEvent.Line>();
-            DialogueEvent.Line line = new DialogueEvent.Line();
-            line.text = "You have such fickle allies.";
+            DialogueEvent.Line line = new DialogueEvent.Line
+            {
+                text = "You have such fickle allies."
+            };
             lines.Add(line);
-            info.abilityLearnedDialogue = new DialogueEvent.LineSet(lines);
+            shove.abilityLearnedDialogue = new DialogueEvent.LineSet(lines);
 
-            NewAbility ability = new NewAbility(info, typeof(Garethmod_Shove), generateTex("garethmod_shove"));
-            Garethmod_Shove.ability = ability.ability;
-            return ability;
+            Garethmod_Shove.ability = shove.ability;
         }
     }
 

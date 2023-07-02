@@ -1,12 +1,9 @@
-﻿using BepInEx;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.IO;
 using DiskCardGame;
 using UnityEngine;
-using APIPlugin;
 using InscryptionAPI.Card;
 
 namespace GarethMod
@@ -18,7 +15,7 @@ namespace GarethMod
             AbilityInfo flighty = AbilityManager.New(
                 PluginGuid + ".flighty",
                 "Flighty",
-                "",
+                "MISSING DESC",
                 typeof(Garethmod_Flighty),
                 "garethmod_flighty.png"
             );
@@ -27,7 +24,7 @@ namespace GarethMod
             List<DialogueEvent.Line> lines = new List<DialogueEvent.Line>();
             DialogueEvent.Line line = new DialogueEvent.Line
             {
-                text = ""
+                text = "Curious, I am unsure what this one does..."
             };
             lines.Add(line);
             flighty.abilityLearnedDialogue = new DialogueEvent.LineSet(lines);

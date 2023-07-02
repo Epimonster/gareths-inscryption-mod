@@ -7,13 +7,22 @@ using System.IO;
 using DiskCardGame;
 using UnityEngine;
 using APIPlugin;
-//using Artwork = GarethMod.GarethmodResources;
 using InscryptionAPI.Card;
 using InscryptionAPI.Helpers;
 using InscryptionAPI.Ascension;
 
 namespace GarethMod
 {
+    /*
+     * GLOBAL TODO:
+     * Split pig behavior code off from sigil
+     * Add AI behavior for Shove, Flighty
+     * Test, Test, Test
+     * Consider cat tribe
+     * 
+     * 
+     * 
+     */
 
     [BepInPlugin(PluginGuid, PluginName, PluginVersion)]
     [BepInDependency("cyantist.inscryption.api", BepInDependency.DependencyFlags.HardDependency)]
@@ -25,24 +34,17 @@ namespace GarethMod
         private const string PluginPrefix = "GarethMod";
         private const string env = "GarethMod.dll";
 
+        private string LESHY_PLACEHOLDER = "Curious, I don't seem to remember this card..."
+
         private void Awake()
         {
             Logger.LogInfo($"Loaded {PluginName}!");
             RegisterModElements();
-            //Harmony harmony = new Harmony(PluginGuid);
-            //harmony.PatchAll();
         }
 
 
         private void RegisterModElements()
         {
-            //Pre sigil card block
-            //List<Texture> watermark = new() { generateTex("garethmodwatermark") };
-            //watermark.ElementAt(0).filterMode = FilterMode.Point;
-
-            //CardManager.Add("Gareth48", "Sorry, can't do that", 1, 1, new List<CardMetaCategory>(), CardComplexity.Simple, CardTemple.Nature, description: "Whats... he doing here?", bloodCost: 0, abilities: new List<Ability>() { }, appearanceBehaviour: new List<CardAppearanceBehaviour.Appearance> { CardAppearanceBehaviour.Appearance.RareCardBackground }, defaultTex: loadTex(Artwork.garethmod_gareth48), decals: watermark, emissionTex: loadTex(Artwork.garethmod_gareth48_emission)); //Texture: generateTex("gareth48"), decals: watermark
-
-
             //ID, internal name, display name, attack, health, descryption
 
             //This card has to come first since certain sigils directly create this card as a snippy debug response
@@ -63,15 +65,15 @@ namespace GarethMod
 
             AddIdentityTheft();
             //Sigil registration
-            //AddDrawAlly();
-            //AddTastyMorsel();
-            //AddIdentityTheft();
+            AddDrawAlly();
+            AddTastyMorsel();
+            AddIdentityTheft();
             //AddShove();
-            //AddStandoffish();
+            AddStandoffish();
             //AddHungry();
-            //AddFlighty();
+            AddFlighty();
 
-
+            //Begin Identity Theft Block
             CardInfo Skinwalker = CardManager.New(
                 modPrefix: PluginPrefix, 
                 "Garethmod_Skinwalker", 
@@ -88,6 +90,7 @@ namespace GarethMod
             CardManager.Add(PluginPrefix, Skinwalker);
 
 
+            //Begin Tasty Morsel Block
             CardInfo WoundedAnimal = CardManager.New(
                 modPrefix: PluginPrefix,
                 "Garethmod_WoundedAnimal",
@@ -148,6 +151,7 @@ namespace GarethMod
                 description: ""
             ).SetCost(bloodCost: 2)
             .AddAbilities(Ability.Evolve, Ability.Sharp)
+            .AddMetaCategories(CardMetaCategory.Rare)
             .AddAppearances(CardAppearanceBehaviour.Appearance.RareCardBackground)
             .SetPortrait("garethmod_snag.png")
             .SetEmissivePortrait("garethmod_snag_emission.png")
@@ -172,34 +176,302 @@ namespace GarethMod
             .SetEvolve(Snag, 1);
             CardManager.Add(PluginPrefix, Sapling);
 
-            //Post sigil registration block
+            //Begin Allies Block
+            //GPT guessed AddTribes
+            CardInfo Oxpecker = CardManager.New(
+                modPrefix: PluginPrefix,
+                "Garethmod_Oxpecker",
+                "Oxpecker",
+                1,
+                1,
+                description: "The adored Oxpecker. A bird capable of befriending even the fiercest of foes."
+            ).SetCost(bloodCost: 1)
+             .AddAbilities(Garethmod_DrawAlly.ability, Ability.Flying)
+             .AddMetaCategories(CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer)
+             .AddTribes(Tribe.Bird)
+             .SetPortrait("garethmod_oxpecker.png")
+             .SetEmissivePortrait("garethmod_oxpecker_emission.png");
+            CardManager.Add(PluginPrefix, Oxpecker);
+
+
+            CardInfo Elephant = CardManager.New(
+                modPrefix: PluginPrefix,
+                "Garethmod_Elephant",
+                "Elephant",
+                2,
+                8,
+                description: "The sturdy elephant. Friendly but not weak."
+            ).SetCost(bloodCost: 3)
+             .AddAbilities(Garethmod_TastyMorsel.ability, Ability.WhackAMole)
+             .AddMetaCategories(CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer)
+             .SetPortrait("garethmod_elephant.png")
+             .SetEmissivePortrait("garethmod_elephant_emission.png");
+            CardManager.Add(PluginPrefix, Elephant);
+
+
+            CardInfo Hyena = CardManager.New(
+                modPrefix: PluginPrefix,
+                "Garethmod_Hyena",
+                "Hyena",
+                1,
+                2,
+                description: "The cackling hyena. It always has an ally lurking in the shadows."
+            ).SetCost(bonesCost: 3)
+             .AddAbilities(Garethmod_DrawAlly.ability)
+             .AddMetaCategories(CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer)
+             .AddTribes(Tribe.Canine)
+             .SetPortrait("garethmod_hyena.png")
+             .SetEmissivePortrait("garethmod_hyena_emission.png");
+            CardManager.Add(PluginPrefix, Hyena);
+
+            //Standoffish Block
+
+            CardInfo Panther = CardManager.New(
+                modPrefix: PluginPrefix,
+                "Garethmod_Panther",
+                "Panther",
+                2,
+                3,
+                description: "The aggressive panther. Never one to back down from a fight."
+            ).SetCost(bloodCost: 2)
+             .AddAbilities(Garethmod_Standoffish.ability)
+             .AddMetaCategories(CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer)
+             .SetPortrait("garethmod_panther.png")
+             .SetEmissivePortrait("garethmod_panther_emission.png");
+            CardManager.Add(PluginPrefix, Panther);
+
+            CardInfo PantherCub = CardManager.New(
+                modPrefix: PluginPrefix,
+                "Garethmod_PantherCub",
+                "Panther Cub",
+                0,
+                1,
+                description: "The young panther. Even now its caution is unwavering"
+            ).SetCost(bloodCost: 1)
+             .AddAbilities(Garethmod_Standoffish.ability, Ability.Evolve)
+             .AddMetaCategories(CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer)
+             .SetPortrait("garethmod_panthercub.png")
+             .SetEmissivePortrait("garethmod_panthercub_emission.png")
+            .SetEvolve(Panther, 1);
+            CardManager.Add(PluginPrefix, PantherCub);
+
+            CardInfo TasmanianDevil = CardManager.New(
+                modPrefix: PluginPrefix,
+                "Garethmod_TasmanianDevil",
+                "Tasmanian Devil",
+                1,
+                4,
+                description: "The vicious Tasmanian devil. A fierce carnivore with a voracious appetite."
+            ).SetCost(bloodCost: 2)
+             .AddAbilities(Garethmod_Standoffish.ability, Ability.GuardDog)
+             .AddMetaCategories(CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer)
+             .SetPortrait("garethmod_tasmaniandevil.png")
+             .SetEmissivePortrait("garethmod_tasmaniandevil_emission.png");
+            CardManager.Add(PluginPrefix, TasmanianDevil);
+
+
+            //Vanilla card
+            CardInfo Archerfish = CardManager.New(
+                modPrefix: PluginPrefix,
+                "Garethmod_Archerfish",
+                "Archerfish",
+                2,
+                1,
+                description: "The archerfish, an excellent marksman known to shoot bugs out of the air with a blast of water."
+            ).SetCost(bloodCost: 2)
+             .AddAbilities(Ability.Submerge, Ability.Sniper)
+             .AddMetaCategories(CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer)
+             .SetPortrait("garethmod_archerfish.png")
+             .SetEmissivePortrait("garethmod_archerfish_emission.png");
+            CardManager.Add(PluginPrefix, Archerfish);
+
+            //Shove Block
+
+            CardInfo HerculesBeetle = CardManager.New(
+                modPrefix: PluginPrefix,
+                "Garethmod_HerculesBeetle",
+                "Hercules Beetle",
+                0,
+                4,
+                description: "The forceful Hercules beetle. It can move creatures many times its size."
+            ).SetCost(bloodCost: 1)
+             .AddTribes(Tribe.Insect)
+             .AddAbilities(Garethmod_Shove.ability)
+             .AddMetaCategories(CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer)
+             .SetPortrait("garethmod_herculesbeetle.png")
+             .SetEmissivePortrait("garethmod_herculesbeetle_emission.png");
+            CardManager.Add(PluginPrefix, HerculesBeetle);
+
+            CardInfo Golem = CardManager.New(
+                modPrefix: PluginPrefix,
+                "Garethmod_Golem",
+                "Golem",
+                0,
+                1,
+                description: "An ancient golem. Strong, but fragile. The magic that binds it is old but powerful. It will reform after death."
+            ).SetCost(bloodCost: 1)
+             .AddAbilities(Garethmod_Shove.ability, Ability.DrawCopyOnDeath)
+             .AddMetaCategories(CardMetaCategory.Rare)
+             .AddAppearances(CardAppearanceBehaviour.Appearance.RareCardBackground)
+             .SetPortrait("garethmod_golem.png")
+             .SetEmissivePortrait("garethmod_golem_emission.png");
+            CardManager.Add(PluginPrefix, Golem);
+
+
+            CardInfo Lion = CardManager.New(
+                modPrefix: PluginPrefix,
+                "Garethmod_Lion",
+                "Lion",
+                3,
+                5,
+                description: "The awe-inspiring lion. Sure to lead your creatures to victory."
+            ).SetCost(bloodCost: 3)
+             .AddAbilities(Ability.BuffNeighbours)
+             .AddMetaCategories(CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer)
+             .SetPortrait("garethmod_lion.png")
+             .SetEmissivePortrait("garethmod_lion_emission.png");
+            CardManager.Add(PluginPrefix, Lion);
+
+            CardInfo YoungLion = CardManager.New(
+                modPrefix: PluginPrefix,
+                "Garethmod_YoungLion",
+                "Juvenile Lion",
+                1,
+                3,
+                description: ""
+            ).SetCost(bloodCost: 2)
+             .AddAbilities(Ability.Evolve)
+             .SetEvolve(Lion, 1)
+             //.SetEvolveId(new EvolveIdentifier("Garethmod_Lion", 1))
+             .SetPortrait("garethmod_younglion.png")
+             .SetEmissivePortrait("garethmod_younglion_emission.png");
+            CardManager.Add(PluginPrefix, YoungLion);
+
+            CardInfo LionCub = CardManager.New(
+                modPrefix: PluginPrefix,
+                "Garethmod_LionCub",
+                "Lion Cub",
+                1,
+                1,
+                description: "The princely lion cub. Given time it will become the king of its pride."
+            ).SetCost(bloodCost: 1)
+             .AddAbilities(Ability.Evolve)
+             .SetEvolve(YoungLion, 1)
+             .AddMetaCategories(CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer)
+             .SetPortrait("garethmod_lioncub.png")
+             .SetEmissivePortrait("garethmod_lioncub_emission.png");
+            CardManager.Add(PluginPrefix, LionCub);
+
+            //Hungry
+            CardInfo Piranha = CardManager.New(
+                modPrefix: PluginPrefix,
+                "Garethmod_Piranha",
+                "Piranha",
+                1,
+                1,
+                description: "The ferocious piranha. Schools can devour any living thing in seconds."
+            ).SetCost(bonesCost: 3)
+             .AddAbilities(Garethmod_Hungry.ability, Ability.Submerge)
+             .AddMetaCategories(CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer)
+             .SetPortrait("garethmod_piranha.png")
+             .SetEmissivePortrait("garethmod_piranha_emission.png");
+            CardManager.Add(PluginPrefix, Piranha);
+
+            CardInfo Leopard = CardManager.New(
+                modPrefix: PluginPrefix,
+                "Garethmod_Leopard",
+                "Leopard",
+                2,
+                3,
+                description: "The stealthy leopard. Invisible to its prey until it's too late."
+            ).SetCost(bloodCost: 2)
+             .AddAbilities(Garethmod_Hungry.ability)
+             .AddMetaCategories(CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer)
+             .SetPortrait("garethmod_leopard.png")
+             .SetEmissivePortrait("garethmod_leopard_emission.png");
+            CardManager.Add(PluginPrefix, Leopard);
+
+            CardInfo KillerBees = CardManager.New(
+                modPrefix: PluginPrefix,
+                "Garethmod_KillerBees",
+                "Killer Bee Swarm",
+                1,
+                1,
+                description: ""
+            ).SetCost(bloodCost: 1)
+             .AddAbilities(Garethmod_Hungry.ability, Ability.BeesOnHit)
+             .AddMetaCategories(CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer)
+             .AddTribes(Tribe.Insect)
+             .SetPortrait("garethmod_killerbees.png")
+             .SetEmissivePortrait("garethmod_killerbees_emission.png");
+            CardManager.Add(PluginPrefix, KillerBees);
+
+
+            //TODO: UNTEATHER PIG AND HUNGRY SIGIL CODE, SHOULD BE A CARD BEHAVIOR NOT IN BUILT
+            CardInfo Pig = CardManager.New(
+                modPrefix: PluginPrefix,
+                "Garethmod_Pig",
+                "Pig",
+                1,
+                2,
+                description: "The ravenous pig. Its hunger is insatiable, it will eat and eat until nothing remains."
+            ).SetCost(bloodCost: 1)
+             .AddAbilities(Garethmod_Hungry.ability)
+             .AddMetaCategories(CardMetaCategory.Rare)
+             .AddTribes(Tribe.Hooved)
+             .AddAppearances(CardAppearanceBehaviour.Appearance.RareCardBackground)
+             .SetPortrait("garethmod_pig.png")
+             .SetAltPortrait("garethmod_pig_alt.png")
+             .SetEmissivePortrait("garethmod_pig_emission.png");
+            CardManager.Add(PluginPrefix, Pig);
+
+
+            //Flighty Block
+
+            CardInfo Badger = CardManager.New(
+                modPrefix: PluginPrefix,
+                "Garethmod_Badger",
+                "Badger",
+                2,
+                3,
+                description: LESHY_PLACEHOLDER
+            ).SetCost(bloodCost: 2)
+             .AddAbilities(Garethmod_Flighty.ability)
+             .AddMetaCategories(CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer)
+             .SetPortrait("garethmod_leopard.png")
+             .SetEmissivePortrait("garethmod_leopard_emission.png");
+            CardManager.Add(PluginPrefix, Badger);
+
+            CardInfo Lynx = CardManager.New(
+                modPrefix: PluginPrefix,
+                "Garethmod_Lynx",
+                "Lynx",
+                1,
+                2,
+                description: LESHY_PLACEHOLDER
+            ).SetCost(bloodCost: 1)
+             .AddAbilities(Garethmod_Standoffish.ability, Garethmod_Flighty.ability)
+             .AddMetaCategories(CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer)
+             .SetPortrait("garethmod_leopard.png")
+             .SetEmissivePortrait("garethmod_leopard_emission.png");
+            CardManager.Add(PluginPrefix, Lynx);
+
+            CardInfo Dragonfly = CardManager.New(
+                modPrefix: PluginPrefix,
+                "Garethmod_Dragonfly",
+                "Dragonfly",
+                3,
+                1,
+                description: LESHY_PLACEHOLDER
+            ).SetCost(bonesCost: 6)
+             .AddAbilities(Ability.Flying, Garethmod_Flighty.ability)
+             .AddMetaCategories(CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer)
+             .AddTribes(Tribe.Insect)
+             .SetPortrait("garethmod_leopard.png")
+             .SetEmissivePortrait("garethmod_leopard_emission.png");
+            CardManager.Add(PluginPrefix, Dragonfly);
+
             /*
-            NewCard.Add("Garethmod_WoundedAnimal", "Wounded Animal", 0, 1, new List<CardMetaCategory>() { CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer }, CardComplexity.Simple, CardTemple.Nature, description: "An easy target for hungry predators.", bonesCost: 3, abilities: new List<Ability> { Garethmod_TastyMorsel.ability }, appearanceBehaviour: new List<CardAppearanceBehaviour.Appearance> { CardAppearanceBehaviour.Appearance.AlternatingBloodDecal }, defaultTex: loadTex(Artwork.garethmod_woundedanimal), decals: watermark, emissionTex: loadTex(Artwork.garethmod_woundedanimal_emission));
-            NewCard.Add("Garethmod_Skinwalker", "Skinwalker", 2, 1, new List<CardMetaCategory>() { CardMetaCategory.Rare }, CardComplexity.Simple, CardTemple.Nature, description: "The enigmatic skinwalker. It mimics the identity of the first creature it slays.", bloodCost: 2, tribes: new List<Tribe> { Tribe.Canine }, abilities: new List<Ability> { Garethmod_IdentityTheft.ability }, appearanceBehaviour: new List<CardAppearanceBehaviour.Appearance> { CardAppearanceBehaviour.Appearance.RareCardBackground }, defaultTex: loadTex(Artwork.garethmod_skinwalker), decals: watermark, emissionTex: loadTex(Artwork.garethmod_skinwalker_emission));
-            NewCard.Add("Garethmod_Lemming", "Lemming", 1, 1, new List<CardMetaCategory>() { CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer }, CardComplexity.Simple, CardTemple.Nature, description: "The paranoid lemming. Fragile and a favorite treat among many animals.", bloodCost: 2, abilities: new List<Ability> { Garethmod_TastyMorsel.ability, Ability.Brittle }, defaultTex: loadTex(Artwork.garethmod_lemming), decals: watermark, emissionTex: loadTex(Artwork.garethmod_lemming_emission));
-            NewCard.Add("Garethmod_Oxpecker", "Oxpecker", 1, 1, new List<CardMetaCategory>() { CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer }, CardComplexity.Simple, CardTemple.Nature, description: "The adored Oxpecker. A bird capable of befriending even the fiercest of foes.", bloodCost: 1, tribes: new List<Tribe> { Tribe.Bird }, abilities: new List<Ability> { Garethmod_DrawAlly.ability, Ability.Flying }, defaultTex: loadTex(Artwork.garethmod_oxpecker), decals: watermark, emissionTex: loadTex(Artwork.garethmod_oxpecker_emission));
-            NewCard.Add("Garethmod_Elephant", "Elephant", 2, 8, new List<CardMetaCategory>() { CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer }, CardComplexity.Simple, CardTemple.Nature, description: "The sturdy elephant. Friendly but not weak.", bloodCost: 3, abilities: new List<Ability> { Garethmod_TastyMorsel.ability, Ability.WhackAMole }, defaultTex: loadTex(Artwork.garethmod_elephant), decals: watermark, emissionTex: loadTex(Artwork.garethmod_elephant_emission));
-            NewCard.Add("Garethmod_Hyena", "Hyena", 1, 2, new List<CardMetaCategory>() { CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer }, CardComplexity.Intermediate, CardTemple.Nature, description: "The cackling hyena. It always has an ally lurking in the shadows.", bonesCost: 3, tribes: new List<Tribe> { Tribe.Canine }, abilities: new List<Ability> { Garethmod_DrawAlly.ability }, defaultTex: loadTex(Artwork.garethmod_hyena), decals: watermark, emissionTex: loadTex(Artwork.garethmod_hyena_emission));
-            NewCard.Add("Garethmod_Treant", "Treant", 1, 9, new List<CardMetaCategory>() { }, CardComplexity.Simple, CardTemple.Nature, description: "", bloodCost: 3, abilities: new List<Ability> { Ability.WhackAMole, Ability.Sharp }, appearanceBehaviour: new List<CardAppearanceBehaviour.Appearance> { CardAppearanceBehaviour.Appearance.RareCardBackground }, defaultTex: loadTex(Artwork.garethmod_treant), decals: watermark, emissionTex: loadTex(Artwork.garethmod_treant_emission));
-            NewCard.Add("Garethmod_Snag", "Snag", 0, 5, new List<CardMetaCategory>() { }, CardComplexity.Simple, CardTemple.Nature, description: "", bloodCost: 2, abilities: new List<Ability> { Ability.Evolve, Ability.Sharp }, appearanceBehaviour: new List<CardAppearanceBehaviour.Appearance> { CardAppearanceBehaviour.Appearance.RareCardBackground }, defaultTex: loadTex(Artwork.garethmod_snag), evolveId: new EvolveIdentifier("Garethmod_Treant", 1), decals: watermark, emissionTex: loadTex(Artwork.garethmod_snag_emission));
-            NewCard.Add("Garethmod_Sapling", "Sapling", 0, 3, new List<CardMetaCategory>() { CardMetaCategory.Rare }, CardComplexity.Simple, CardTemple.Nature, description: "With time, even the smallest sapling becomes a massive, imposing obstacle.", bloodCost: 1, abilities: new List<Ability> { Ability.Evolve }, appearanceBehaviour: new List<CardAppearanceBehaviour.Appearance> { CardAppearanceBehaviour.Appearance.RareCardBackground }, defaultTex: loadTex(Artwork.garethmod_sapling), evolveId: new EvolveIdentifier("Garethmod_Snag", 1), decals: watermark, emissionTex: loadTex(Artwork.garethmod_sapling_emission));
-            NewCard.Add("Garethmod_Panther", "Panther", 2, 3, new List<CardMetaCategory>() { CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer }, CardComplexity.Simple, CardTemple.Nature, description: "The agressive panther. Never one to back down from a fight.", bloodCost: 2, abilities: new List<Ability> { Garethmod_Standoffish.ability }, defaultTex: loadTex(Artwork.garethmod_panther), decals: watermark, emissionTex: loadTex(Artwork.garethmod_panther_emission));
-            NewCard.Add("Garethmod_PantherCub", "Panther Cub", 0, 1, new List<CardMetaCategory>() { CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer }, CardComplexity.Simple, CardTemple.Nature, description: "The young panther. Even now it's caution is unwavering", bloodCost: 1, abilities: new List<Ability> { Garethmod_Standoffish.ability, Ability.Evolve }, defaultTex: loadTex(Artwork.garethmod_panthercub), evolveId: new EvolveIdentifier("Garethmod_Panther", 1), decals: watermark, emissionTex: loadTex(Artwork.garethmod_panthercub_emission));
-            NewCard.Add("Garethmod_TasmanianDevil", "Tasmanian Devil", 1, 4, new List<CardMetaCategory>() { CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer }, CardComplexity.Simple, CardTemple.Nature, description: "The vicious tasmanian devil. A fierce carnivore with a voracious appetite.", bloodCost: 2, abilities: new List<Ability> { Garethmod_Standoffish.ability, Ability.GuardDog }, defaultTex: loadTex(Artwork.garethmod_tasmaniandevil), decals: watermark, emissionTex: loadTex(Artwork.garethmod_tasmaniandevil_emission));
-            NewCard.Add("Garethmod_Archerfish", "Archerfish", 2, 1, new List<CardMetaCategory>() { CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer }, CardComplexity.Simple, CardTemple.Nature, description: "The archerfish, an excellent marksman known to shoot bugs out of the air with a blast of water.", bloodCost: 2, abilities: new List<Ability> { Ability.Submerge, Ability.Sniper }, defaultTex: loadTex(Artwork.garethmod_archerfish), decals: watermark, emissionTex: loadTex(Artwork.garethmod_archerfish_emission));
-            NewCard.Add("Garethmod_HerculesBeetle", "Hercules Beetle", 0, 4, new List<CardMetaCategory>() { CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer }, CardComplexity.Simple, CardTemple.Nature, description: "The forceful hercules beetle. It can move creatures many times its size.", bloodCost: 1, tribes: new List<Tribe> { Tribe.Insect }, abilities: new List<Ability> { Garethmod_Shove.ability }, defaultTex: loadTex(Artwork.garethmod_herculesbeetle), decals: watermark, emissionTex: loadTex(Artwork.garethmod_herculesbeetle_emission));
-            NewCard.Add("Garethmod_Golem", "Golem", 0, 1, new List<CardMetaCategory>() { CardMetaCategory.Rare }, CardComplexity.Simple, CardTemple.Nature, description: "An ancient golem. Strong, but fragile. The magic that binds it is old but powerful. It will reform after death.", bloodCost: 1, abilities: new List<Ability> { Garethmod_Shove.ability, Ability.DrawCopyOnDeath }, appearanceBehaviour: new List<CardAppearanceBehaviour.Appearance> { CardAppearanceBehaviour.Appearance.RareCardBackground }, defaultTex: loadTex(Artwork.garethmod_golem), decals: watermark, emissionTex: loadTex(Artwork.garethmod_golem_emission));
-            NewCard.Add("Garethmod_Lion", "Lion", 3, 5, new List<CardMetaCategory>() { CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer }, CardComplexity.Simple, CardTemple.Nature, description: "The awe-inspiring lion. Sure to lead your creatures to victory.", bloodCost: 3, abilities: new List<Ability> { Ability.BuffNeighbours }, defaultTex: loadTex(Artwork.garethmod_lion), decals: watermark, emissionTex: loadTex(Artwork.garethmod_lion_emission));
-            NewCard.Add("Garethmod_YoungLion", "Juvenile Lion", 1, 3, new List<CardMetaCategory>() { }, CardComplexity.Simple, CardTemple.Nature, description: "", bloodCost: 2, abilities: new List<Ability> { Ability.Evolve }, defaultTex: loadTex(Artwork.garethmod_younglion), evolveId: new EvolveIdentifier("Garethmod_Lion", 1), decals: watermark, emissionTex: loadTex(Artwork.garethmod_younglion_emission));
-            NewCard.Add("Garethmod_LionCub", "Lion Cub", 1, 1, new List<CardMetaCategory>() { CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer }, CardComplexity.Simple, CardTemple.Nature, description: "The princley lion cub. Given time it will become the king of its pride.", bloodCost: 1, abilities: new List<Ability> { Ability.Evolve }, defaultTex: loadTex(Artwork.garethmod_lioncub), evolveId: new EvolveIdentifier("Garethmod_YoungLion", 1), decals: watermark, emissionTex: loadTex(Artwork.garethmod_lioncub_emission));
-            NewCard.Add("Garethmod_Pig", "Pig", 1, 2, new List<CardMetaCategory>() { CardMetaCategory.Rare }, CardComplexity.Simple, CardTemple.Nature, description: "The ravenous pig. It's hunger is instatiable, it will eat and eat until nothing remains.", bloodCost: 1, tribes: new List<Tribe> { Tribe.Hooved }, abilities: new List<Ability> { Garethmod_Hungry.ability }, appearanceBehaviour: new List<CardAppearanceBehaviour.Appearance> { CardAppearanceBehaviour.Appearance.RareCardBackground }, defaultTex: loadTex(Artwork.garethmod_pig), altTex: loadTex(Artwork.garethmod_pig_alt), decals: watermark, emissionTex: loadTex(Artwork.garethmod_pig_emission));
-            NewCard.Add("Garethmod_Piranha", "Piranha", 1, 1, new List<CardMetaCategory>() { CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer }, CardComplexity.Simple, CardTemple.Nature, description: "The ferocious piranha. Schools can devour any living thing in seconds.", bonesCost: 3, abilities: new List<Ability> { Garethmod_Hungry.ability, Ability.Submerge }, defaultTex: loadTex(Artwork.garethmod_piranha), decals: watermark, emissionTex: loadTex(Artwork.garethmod_piranha_emission));
-            NewCard.Add("Garethmod_Leopard", "Leopard", 2, 3, new List<CardMetaCategory>() { CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer }, CardComplexity.Simple, CardTemple.Nature, description: "The stealthy leopard. Invisible to its prey until it's too late.", bloodCost: 2, abilities: new List<Ability> { Garethmod_Hungry.ability }, defaultTex: loadTex(Artwork.garethmod_leopard), decals: watermark, emissionTex: loadTex(Artwork.garethmod_leopard_emission));
-            NewCard.Add("Garethmod_KillerBees", "Killer Bee Swarm", 1, 1, new List<CardMetaCategory>() { CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer }, CardComplexity.Simple, CardTemple.Nature, description: "", bloodCost: 1, tribes: new List<Tribe> { Tribe.Insect }, abilities: new List<Ability> { Garethmod_Hungry.ability, Ability.BeesOnHit }, defaultTex: loadTex(Artwork.garethmod_killerbees), decals: watermark, emissionTex: loadTex(Artwork.garethmod_killerbees_emission));
-            NewCard.Add("Garethmod_Badger", "Badger", 2, 3, new List<CardMetaCategory>() { CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer }, CardComplexity.Simple, CardTemple.Nature, description: "The stealthy leopard. Invisible to its prey until it's too late.", bloodCost: 0, abilities: new List<Ability> { Garethmod_Flighty.ability }, defaultTex: loadTex(Artwork.garethmod_leopard), decals: watermark, emissionTex: loadTex(Artwork.garethmod_leopard_emission));
-            NewCard.Add("Garethmod_Lynx", "Lynx", 1, 2, new List<CardMetaCategory>() { CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer }, CardComplexity.Simple, CardTemple.Nature, description: "The stealthy leopard. Invisible to its prey until it's too late.", bloodCost: 1, abilities: new List<Ability> { Garethmod_Standoffish.ability, Garethmod_Flighty.ability }, defaultTex: loadTex(Artwork.garethmod_leopard), decals: watermark, emissionTex: loadTex(Artwork.garethmod_leopard_emission));
-            NewCard.Add("Garethmod_Dragonfly", "Dragonfly", 3, 1, new List<CardMetaCategory>() { CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer }, CardComplexity.Simple, CardTemple.Nature, description: "", bonesCost: 6, tribes: new List<Tribe> { Tribe.Insect }, abilities: new List<Ability> { Ability.Flying, Garethmod_Flighty.ability }, defaultTex: loadTex(Artwork.garethmod_leopard), decals: watermark, emissionTex: loadTex(Artwork.garethmod_leopard_emission));
-        }
 
         private Texture2D generateTex(String fileName)
         {
@@ -215,8 +487,8 @@ namespace GarethMod
             tex.filterMode = FilterMode.Point;
             return tex;
         }
-    }
             */
+
             //Test decks down here since all cards are defined
 
             StarterDeckInfo garethtestdeck = ScriptableObject.CreateInstance<StarterDeckInfo>();

@@ -7,12 +7,34 @@ using System.IO;
 using DiskCardGame;
 using UnityEngine;
 using APIPlugin;
-using Artwork = GarethMod.GarethmodResources;
+using InscryptionAPI.Card;
 
 namespace GarethMod
 {
     public partial class Plugin
     {
+        private void AddHungry()
+        {
+            AbilityInfo hungry = AbilityManager.New(
+                PluginGuid + ".hungry",
+                "Hungry",
+                "When a creature bearing this sigil is played, choose another friendly creature to eat. The eaten creature will have its health and power added to the creature bearing this sigil.",
+                typeof(Garethmod_Hungry),
+                "garethmod_hungry.png"
+            );
+            hungry.powerLevel = 2;
+            hungry.metaCategories = new List<AbilityMetaCategory> { AbilityMetaCategory.Part1Rulebook, AbilityMetaCategory.Part1Modular };
+            List<DialogueEvent.Line> lines = new List<DialogueEvent.Line>();
+            DialogueEvent.Line line = new DialogueEvent.Line
+            {
+                text = "It seems eating another creature has caused yours to grow stronger."
+            };
+            lines.Add(line);
+            hungry.abilityLearnedDialogue = new DialogueEvent.LineSet(lines);
+
+            Garethmod_Hungry.ability = hungry.ability;
+        }
+        /*
         private NewAbility AddHungry()
         {
             AbilityInfo info = ScriptableObject.CreateInstance<AbilityInfo>();
@@ -31,6 +53,7 @@ namespace GarethMod
             Garethmod_Hungry.ability = ability.ability;
             return ability;
         }
+        */
     }
 
         public class Garethmod_Hungry : AbilityBehaviour

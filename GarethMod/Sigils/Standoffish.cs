@@ -2,34 +2,34 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.IO;
 using DiskCardGame;
-using UnityEngine;
-using APIPlugin;
-using Artwork = GarethMod.GarethmodResources;
+using InscryptionAPI.Card;
 
 namespace GarethMod
 {
     public partial class Plugin
     {
-        private NewAbility AddStandoffish()
+        private void AddStandoffish()
         {
-            AbilityInfo info = ScriptableObject.CreateInstance<AbilityInfo>();
-            info.powerLevel = 0;
-            info.rulebookName = "Standoffish";
-            info.rulebookDescription = "As long as a creature bearing this sigil is opposed by another, it has +2 attack.";
-            info.metaCategories = new List<AbilityMetaCategory> { AbilityMetaCategory.Part1Rulebook, AbilityMetaCategory.Part1Modular };
-
+            //Settled on a new format at this point
+            AbilityInfo standoffish = AbilityManager.New(
+                PluginGuid + ".standoffish",
+                "Standoffish",
+                "As long as a creature bearing this sigil is opposed by another, it has +2 attack.",
+                typeof(Garethmod_Standoffish),
+                "garethmod_standoffish.png"
+            );
+            standoffish.powerLevel = 3;
+            standoffish.metaCategories = new List<AbilityMetaCategory> { AbilityMetaCategory.Part1Rulebook, AbilityMetaCategory.Part1Modular };
             List<DialogueEvent.Line> lines = new List<DialogueEvent.Line>();
-            DialogueEvent.Line line = new DialogueEvent.Line();
-            line.text = "Your creature will fight with all it has until none oppose it.";
+            DialogueEvent.Line line = new DialogueEvent.Line
+            {
+                text = "Your creature will fight with all it has until none oppose it."
+            };
             lines.Add(line);
-            info.abilityLearnedDialogue = new DialogueEvent.LineSet(lines);
+            standoffish.abilityLearnedDialogue = new DialogueEvent.LineSet(lines);
 
-            NewAbility ability = new NewAbility(info, typeof(Garethmod_Standoffish), generateTex("garethmod_standoffish"));
-            Garethmod_Standoffish.ability = ability.ability;
-            return ability;
+            Garethmod_Standoffish.ability = standoffish.ability;
         }
     }
 

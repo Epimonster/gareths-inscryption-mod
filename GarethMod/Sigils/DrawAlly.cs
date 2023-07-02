@@ -33,7 +33,7 @@ namespace GarethMod
             lines.Add(line);
             drawally.abilityLearnedDialogue = new DialogueEvent.LineSet(lines);
 
-            Garethmod_IdentityTheft.ability = drawally.ability;
+            Garethmod_DrawAlly.ability = drawally.ability;
         }
 
     }
