@@ -438,8 +438,8 @@ namespace GarethMod
             ).SetCost(bloodCost: 2)
              .AddAbilities(Garethmod_Flighty.ability)
              .AddMetaCategories(CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer)
-             .SetPortrait("garethmod_leopard.png")
-             .SetEmissivePortrait("garethmod_leopard_emission.png");
+             .SetPortrait("garethmod_badger.png")
+             .SetEmissivePortrait("garethmod_badger_emission.png");
             CardManager.Add(PluginPrefix, Badger);
 
             CardInfo Lynx = CardManager.New(
@@ -452,8 +452,8 @@ namespace GarethMod
             ).SetCost(bloodCost: 1)
              .AddAbilities(Garethmod_Standoffish.ability, Garethmod_Flighty.ability)
              .AddMetaCategories(CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer)
-             .SetPortrait("garethmod_leopard.png")
-             .SetEmissivePortrait("garethmod_leopard_emission.png");
+             .SetPortrait("garethmod_lynx.png")
+             .SetEmissivePortrait("garethmod_lynx_emission.png");
             CardManager.Add(PluginPrefix, Lynx);
 
             CardInfo Dragonfly = CardManager.New(
@@ -467,8 +467,8 @@ namespace GarethMod
              .AddAbilities(Ability.Flying, Garethmod_Flighty.ability)
              .AddMetaCategories(CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer)
              .AddTribes(Tribe.Insect)
-             .SetPortrait("garethmod_leopard.png")
-             .SetEmissivePortrait("garethmod_leopard_emission.png");
+             .SetPortrait("garethmod_dragonfly.png")
+             .SetEmissivePortrait("garethmod_dragonfly_emission.png");
             CardManager.Add(PluginPrefix, Dragonfly);
 
             /*
@@ -493,7 +493,7 @@ namespace GarethMod
 
             StarterDeckInfo garethtestdeck = ScriptableObject.CreateInstance<StarterDeckInfo>();
             garethtestdeck.title = "GarethDebugDeck";
-            garethtestdeck.iconSprite = TextureHelper.GetImageAsSprite("starterdeck_icon_example.png", TextureHelper.SpriteType.StarterDeckIcon);
+            garethtestdeck.iconSprite = TextureHelper.GetImageAsSprite("garethmod_starterdeck_icon.png", TextureHelper.SpriteType.StarterDeckIcon);
             garethtestdeck.cards = new() { Skinwalker, Skinwalker, Skinwalker };
 
             StarterDeckManager.Add(PluginGuid, garethtestdeck);
