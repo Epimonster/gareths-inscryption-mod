@@ -19,7 +19,7 @@ namespace GarethMod
      * Add AI behavior for Shove, Flighty
      * Test, Test, Test
      * Consider cat tribe
-     * 
+     * credit: divisionbyzorro/Infiniscryption for garethsmod pack_icon
      * 
      * 
      */
@@ -34,7 +34,7 @@ namespace GarethMod
         private const string PluginPrefix = "GarethMod";
         private const string env = "GarethMod.dll";
 
-        private string LESHY_PLACEHOLDER = "Curious, I don't seem to remember this card..."
+        private const string LESHY_PLACEHOLDER = "Curious, I don't seem to remember this card...";
 
         private void Awake()
         {
@@ -63,14 +63,13 @@ namespace GarethMod
             CardManager.Add(PluginPrefix, Gareth48);
 
 
-            AddIdentityTheft();
             //Sigil registration
             AddDrawAlly();
             AddTastyMorsel();
             AddIdentityTheft();
-            //AddShove();
+            AddShove();
             AddStandoffish();
-            //AddHungry();
+            AddHungry();
             AddFlighty();
 
             //Begin Identity Theft Block
@@ -109,7 +108,7 @@ namespace GarethMod
 
             CardInfo Lemming = CardManager.New(
                 modPrefix: PluginPrefix,
-                "Garethmod_Lemming",
+                "Garethmod_Lemming", PluginNameq
                 "Lemming",
                 1,
                 1,
@@ -135,7 +134,7 @@ namespace GarethMod
                 description: ""
             ).SetCost(bloodCost: 3)
             .AddAbilities(Ability.WhackAMole, Ability.Sharp)
-            .AddAppearances(CardAppearanceBehaviour.Appearance.RareCardBackground)
+            .AddAppearances(CardAppearanceBehaviour.Appearance.RareCardBackground, GarethmodDecal)
             .SetPortrait("garethmod_treant.png")
             .SetEmissivePortrait("garethmod_treant_emission.png");
             CardManager.Add(PluginPrefix, Treant);
@@ -152,7 +151,7 @@ namespace GarethMod
             ).SetCost(bloodCost: 2)
             .AddAbilities(Ability.Evolve, Ability.Sharp)
             .AddMetaCategories(CardMetaCategory.Rare)
-            .AddAppearances(CardAppearanceBehaviour.Appearance.RareCardBackground)
+            .AddAppearances(CardAppearanceBehaviour.Appearance.RareCardBackground, GarethmodDecal)
             .SetPortrait("garethmod_snag.png")
             .SetEmissivePortrait("garethmod_snag_emission.png")
             .SetEvolve(Treant, 1);
@@ -170,7 +169,7 @@ namespace GarethMod
             ).SetCost(bloodCost: 1)
             .AddAbilities(Ability.Evolve)
             .AddMetaCategories(CardMetaCategory.Rare)
-            .AddAppearances(CardAppearanceBehaviour.Appearance.RareCardBackground)
+            .AddAppearances(CardAppearanceBehaviour.Appearance.RareCardBackground, GarethmodDecal)
             .SetPortrait("garethmod_sapling.png")
             .SetEmissivePortrait("garethmod_sapling_emission.png")
             .SetEvolve(Snag, 1);
@@ -188,6 +187,7 @@ namespace GarethMod
             ).SetCost(bloodCost: 1)
              .AddAbilities(Garethmod_DrawAlly.ability, Ability.Flying)
              .AddMetaCategories(CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer)
+             .AddAppearances(GarethmodDecal)
              .AddTribes(Tribe.Bird)
              .SetPortrait("garethmod_oxpecker.png")
              .SetEmissivePortrait("garethmod_oxpecker_emission.png");
@@ -204,6 +204,7 @@ namespace GarethMod
             ).SetCost(bloodCost: 3)
              .AddAbilities(Garethmod_TastyMorsel.ability, Ability.WhackAMole)
              .AddMetaCategories(CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer)
+             .AddAppearances(GarethmodDecal)
              .SetPortrait("garethmod_elephant.png")
              .SetEmissivePortrait("garethmod_elephant_emission.png");
             CardManager.Add(PluginPrefix, Elephant);
@@ -219,6 +220,7 @@ namespace GarethMod
             ).SetCost(bonesCost: 3)
              .AddAbilities(Garethmod_DrawAlly.ability)
              .AddMetaCategories(CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer)
+             .AddAppearances(GarethmodDecal)
              .AddTribes(Tribe.Canine)
              .SetPortrait("garethmod_hyena.png")
              .SetEmissivePortrait("garethmod_hyena_emission.png");
@@ -236,6 +238,7 @@ namespace GarethMod
             ).SetCost(bloodCost: 2)
              .AddAbilities(Garethmod_Standoffish.ability)
              .AddMetaCategories(CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer)
+             .AddAppearances(GarethmodDecal)
              .SetPortrait("garethmod_panther.png")
              .SetEmissivePortrait("garethmod_panther_emission.png");
             CardManager.Add(PluginPrefix, Panther);
@@ -250,9 +253,10 @@ namespace GarethMod
             ).SetCost(bloodCost: 1)
              .AddAbilities(Garethmod_Standoffish.ability, Ability.Evolve)
              .AddMetaCategories(CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer)
+             .AddAppearances(GarethmodDecal)
              .SetPortrait("garethmod_panthercub.png")
              .SetEmissivePortrait("garethmod_panthercub_emission.png")
-            .SetEvolve(Panther, 1);
+             .SetEvolve(Panther, 1);
             CardManager.Add(PluginPrefix, PantherCub);
 
             CardInfo TasmanianDevil = CardManager.New(
@@ -265,6 +269,7 @@ namespace GarethMod
             ).SetCost(bloodCost: 2)
              .AddAbilities(Garethmod_Standoffish.ability, Ability.GuardDog)
              .AddMetaCategories(CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer)
+             .AddAppearances(GarethmodDecal)
              .SetPortrait("garethmod_tasmaniandevil.png")
              .SetEmissivePortrait("garethmod_tasmaniandevil_emission.png");
             CardManager.Add(PluginPrefix, TasmanianDevil);
@@ -281,6 +286,7 @@ namespace GarethMod
             ).SetCost(bloodCost: 2)
              .AddAbilities(Ability.Submerge, Ability.Sniper)
              .AddMetaCategories(CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer)
+             .AddAppearances(GarethmodDecal)
              .SetPortrait("garethmod_archerfish.png")
              .SetEmissivePortrait("garethmod_archerfish_emission.png");
             CardManager.Add(PluginPrefix, Archerfish);
@@ -298,6 +304,7 @@ namespace GarethMod
              .AddTribes(Tribe.Insect)
              .AddAbilities(Garethmod_Shove.ability)
              .AddMetaCategories(CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer)
+             .AddAppearances(GarethmodDecal)
              .SetPortrait("garethmod_herculesbeetle.png")
              .SetEmissivePortrait("garethmod_herculesbeetle_emission.png");
             CardManager.Add(PluginPrefix, HerculesBeetle);
@@ -312,7 +319,7 @@ namespace GarethMod
             ).SetCost(bloodCost: 1)
              .AddAbilities(Garethmod_Shove.ability, Ability.DrawCopyOnDeath)
              .AddMetaCategories(CardMetaCategory.Rare)
-             .AddAppearances(CardAppearanceBehaviour.Appearance.RareCardBackground)
+             .AddAppearances(CardAppearanceBehaviour.Appearance.RareCardBackground, GarethmodDecal)
              .SetPortrait("garethmod_golem.png")
              .SetEmissivePortrait("garethmod_golem_emission.png");
             CardManager.Add(PluginPrefix, Golem);
@@ -328,9 +335,11 @@ namespace GarethMod
             ).SetCost(bloodCost: 3)
              .AddAbilities(Ability.BuffNeighbours)
              .AddMetaCategories(CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer)
+             .AddAppearances(GarethmodDecal)
              .SetPortrait("garethmod_lion.png")
              .SetEmissivePortrait("garethmod_lion_emission.png");
             CardManager.Add(PluginPrefix, Lion);
+
 
             CardInfo YoungLion = CardManager.New(
                 modPrefix: PluginPrefix,
@@ -341,6 +350,7 @@ namespace GarethMod
                 description: ""
             ).SetCost(bloodCost: 2)
              .AddAbilities(Ability.Evolve)
+             .AddAppearances(GarethmodDecal)
              .SetEvolve(Lion, 1)
              //.SetEvolveId(new EvolveIdentifier("Garethmod_Lion", 1))
              .SetPortrait("garethmod_younglion.png")
@@ -358,6 +368,7 @@ namespace GarethMod
              .AddAbilities(Ability.Evolve)
              .SetEvolve(YoungLion, 1)
              .AddMetaCategories(CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer)
+             .AddAppearances(GarethmodDecal)
              .SetPortrait("garethmod_lioncub.png")
              .SetEmissivePortrait("garethmod_lioncub_emission.png");
             CardManager.Add(PluginPrefix, LionCub);
@@ -373,6 +384,7 @@ namespace GarethMod
             ).SetCost(bonesCost: 3)
              .AddAbilities(Garethmod_Hungry.ability, Ability.Submerge)
              .AddMetaCategories(CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer)
+             .AddAppearances(GarethmodDecal)
              .SetPortrait("garethmod_piranha.png")
              .SetEmissivePortrait("garethmod_piranha_emission.png");
             CardManager.Add(PluginPrefix, Piranha);
@@ -387,6 +399,7 @@ namespace GarethMod
             ).SetCost(bloodCost: 2)
              .AddAbilities(Garethmod_Hungry.ability)
              .AddMetaCategories(CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer)
+             .AddAppearances(GarethmodDecal)
              .SetPortrait("garethmod_leopard.png")
              .SetEmissivePortrait("garethmod_leopard_emission.png");
             CardManager.Add(PluginPrefix, Leopard);
@@ -401,6 +414,7 @@ namespace GarethMod
             ).SetCost(bloodCost: 1)
              .AddAbilities(Garethmod_Hungry.ability, Ability.BeesOnHit)
              .AddMetaCategories(CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer)
+             .AddAppearances(GarethmodDecal)
              .AddTribes(Tribe.Insect)
              .SetPortrait("garethmod_killerbees.png")
              .SetEmissivePortrait("garethmod_killerbees_emission.png");
@@ -419,7 +433,7 @@ namespace GarethMod
              .AddAbilities(Garethmod_Hungry.ability)
              .AddMetaCategories(CardMetaCategory.Rare)
              .AddTribes(Tribe.Hooved)
-             .AddAppearances(CardAppearanceBehaviour.Appearance.RareCardBackground)
+             .AddAppearances(CardAppearanceBehaviour.Appearance.RareCardBackground, GarethmodDecal)
              .SetPortrait("garethmod_pig.png")
              .SetAltPortrait("garethmod_pig_alt.png")
              .SetEmissivePortrait("garethmod_pig_emission.png");
@@ -438,6 +452,7 @@ namespace GarethMod
             ).SetCost(bloodCost: 2)
              .AddAbilities(Garethmod_Flighty.ability)
              .AddMetaCategories(CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer)
+             .AddAppearances(GarethmodDecal)
              .SetPortrait("garethmod_badger.png")
              .SetEmissivePortrait("garethmod_badger_emission.png");
             CardManager.Add(PluginPrefix, Badger);
@@ -452,6 +467,7 @@ namespace GarethMod
             ).SetCost(bloodCost: 1)
              .AddAbilities(Garethmod_Standoffish.ability, Garethmod_Flighty.ability)
              .AddMetaCategories(CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer)
+             .AddAppearances(GarethmodDecal)
              .SetPortrait("garethmod_lynx.png")
              .SetEmissivePortrait("garethmod_lynx_emission.png");
             CardManager.Add(PluginPrefix, Lynx);
@@ -466,6 +482,7 @@ namespace GarethMod
             ).SetCost(bonesCost: 6)
              .AddAbilities(Ability.Flying, Garethmod_Flighty.ability)
              .AddMetaCategories(CardMetaCategory.ChoiceNode, CardMetaCategory.TraderOffer)
+             .AddAppearances(GarethmodDecal)
              .AddTribes(Tribe.Insect)
              .SetPortrait("garethmod_dragonfly.png")
              .SetEmissivePortrait("garethmod_dragonfly_emission.png");

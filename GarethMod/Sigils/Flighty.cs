@@ -29,7 +29,7 @@ namespace GarethMod
             lines.Add(line);
             flighty.abilityLearnedDialogue = new DialogueEvent.LineSet(lines);
 
-            Garethmod_IdentityTheft.ability = flighty.ability;
+            Garethmod_Flighty.ability = flighty.ability;
         }
     }
     public class Garethmod_Flighty : AbilityBehaviour

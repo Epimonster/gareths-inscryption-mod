@@ -34,4 +34,16 @@
       <HintPath>lib\Sirenix.Serialization.dll</HintPath>
     </Reference>
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="art\boons\" />
+    <Folder Include="art\cardappearances\" />
+    <Folder Include="art\cardbacks\" />
+    <Folder Include="art\cardcosts\" />
+    <Folder Include="art\cardslots\" />
+    <Folder Include="art\challenges\" />
+    <Folder Include="art\sequencers\" />
+    <Folder Include="art\specialstaticons\" />
+    <Folder Include="art\tribeicons\" />
+  </ItemGroup>
 </Project>
