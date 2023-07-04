@@ -68,7 +68,8 @@ namespace GarethMod
             }
             public override IEnumerator OnResolveOnBoard()
             {
-                //An unfotunate caveat I'm devloping to get around not wanting to learn how special behaviors work will be refractored later.
+                //An unfortunate caveat I'm devloping to get around not wanting to learn how special behaviors work will be refractored later.
+                Debug.Log(base.Card.Info.name);
                 if (base.Card.Info.name.Equals("Garethmod_Pig"))
                 {
                     //Debug.Log("Pig");
@@ -140,7 +141,7 @@ namespace GarethMod
             //AssetBundle.LoadFromFile(Path.Combine(Path.GetDirectoryName(Info.Location), "zombievirus"))
             protected virtual void OnInvalidTargetSelected(CardSlot targetSlot)
             {
-            Debug.Log("Something has gone very very wrong");
+            //Debug.Log("Something has gone very very wrong");
             }
         }
     }

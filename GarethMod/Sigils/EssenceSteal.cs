@@ -73,8 +73,8 @@ namespace GarethMod
 
             if (target.Health == 0)
             {
-                //Turn into Gareth for weird interactions
-                if (target.Info.traits.Contains(Trait.Uncuttable))
+                //Turn into Gareth for weird interactions -- Giant added since there are now multiple uncuttable doesnt necessarily disclude them
+                if (target.Info.traits.Contains(Trait.Uncuttable)|| target.Info.traits.Contains(Trait.Giant))
                 {
                     yield return base.Card.TransformIntoCard(CardLoader.GetCardByName("Garethmod_Gareth48"));
                     base.Card.HealDamage(base.Card.Status.damageTaken);

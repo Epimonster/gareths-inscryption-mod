@@ -16,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="API_dev-API" Version="2.4.0" />
     <PackageReference Include="BepInEx-MonoMod_Loader_Inscryption" Version="1.0.0" />
     <PackageReference Include="BepInEx.Analyzers" Version="1.*" PrivateAssets="all" />
     <PackageReference Include="BepInEx.Core" Version="5.*" />
@@ -30,6 +29,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="Infiniscryption.PackManager">
+      <HintPath>..\..\..\Dependencies\Infiniscryption.PackManager.dll</HintPath>
+    </Reference>
+    <Reference Include="InscryptionAPI">
+      <HintPath>..\..\..\Dependencies\InscryptionAPI.dll</HintPath>
+    </Reference>
+    <Reference Include="InscryptionCommunityPatch">
+      <HintPath>..\..\..\Dependencies\InscryptionCommunityPatch.dll</HintPath>
+    </Reference>
     <Reference Include="Sirenix.Serialization">
       <HintPath>lib\Sirenix.Serialization.dll</HintPath>
     </Reference>

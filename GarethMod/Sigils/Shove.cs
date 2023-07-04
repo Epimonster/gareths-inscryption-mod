@@ -18,7 +18,7 @@ namespace GarethMod
             AbilityInfo shove = AbilityManager.New(
                 PluginGuid + ".shove",
                 "Shove",
-                "When a creature bearing this sigil is played, it will move up to the space opposing it. Creatures that are in the way will be pushed in the same direction. Can't push things that are too heavy (like the Pack Mule and the Moon)",
+                "When a creature bearing this sigil is played, it will move up to the space opposing it. Creatures that are in the way will be pushed in the same direction.", //Can't push things that are too heavy (like the Pack Mule and the Moon)
                 typeof(Garethmod_Shove),
                 "garethmod_shove.png"
             );

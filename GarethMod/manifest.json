@@ -1,10 +1,9 @@
 {
-    "name": "GarethsMod",
+    "name": "GarethMod",
     "version_number": "2.0.0",
     "website_url": "",
-    "description": "This mod is designed to add new sigils and cards to the game that fit nicely into the flavor and balance of Inscryption while providing some unique gameplay variety.",
+    "description": "A booster pack that adds new sigils and cards to the game that fit into the flavor and balance of Inscryption while providing some unique gameplay variety. Adds 26 cards and 6 sigils. Created by Gareth48 and illustrated by Plutraser.",
     "dependencies": [
-        "BepInEx-BepInExPack_Inscryption-5.4.1701",
-        "InscryptionAPI-API-1.13.0"
+      "API_dev-API-2.14.3"
     ]
 }

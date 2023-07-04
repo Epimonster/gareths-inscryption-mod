@@ -15,7 +15,7 @@ namespace GarethMod
             AbilityInfo flighty = AbilityManager.New(
                 PluginGuid + ".flighty",
                 "Flighty",
-                "MISSING DESC",
+                "After a creature bearing this sigil attacks the user chooses a space. The creature will move to that space.",
                 typeof(Garethmod_Flighty),
                 "garethmod_flighty.png"
             );
@@ -24,7 +24,7 @@ namespace GarethMod
             List<DialogueEvent.Line> lines = new List<DialogueEvent.Line>();
             DialogueEvent.Line line = new DialogueEvent.Line
             {
-                text = "Curious, I am unsure what this one does..."
+                text = "It retreated after it struck, perhaps it's regathering its strength for another strike."
             };
             lines.Add(line);
             flighty.abilityLearnedDialogue = new DialogueEvent.LineSet(lines);
